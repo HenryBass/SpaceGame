@@ -1,7 +1,12 @@
+:root {
+  --color: #2ec27e;
+}
+
+
 body {
   font-family: monospace;
   background: black;
-  color: #2ec27e;
+  color: var(--color);
 }
 
 html {
@@ -11,25 +16,26 @@ html {
 input {
   border: none;
   background: black;
-  color: #2ec27e;
+  color: var(--color);
   font-family: monospace;
   font-size: 16px;
-  border: 1px #2ec27e solid;
+  border: 1px var(--color) solid;
+  width: 40%;
 }
 
 p, b{
   font-size: 16px;
 }
 
-.planet{
-  border: 1px #2ec27e solid;
+#console{
+    width: 40%;
+  height: 40%;
+    overflow: auto;
+
 }
 
-#console{
-  border: 1px #2ec27e solid;
-    width: 40%;
-    position: absolute;
-    overflow: auto;
-    top:40%;
-    bottom:100px;
+#planet {
+
+  margin: 20px;
+  width: 40%;
 }
