@@ -1,0 +1,35 @@
+body {
+  font-family: monospace;
+  background: black;
+  color: #2ec27e;
+}
+
+html {
+  margin: 0px;
+}
+
+input {
+  border: none;
+  background: black;
+  color: #2ec27e;
+  font-family: monospace;
+  font-size: 16px;
+  border: 1px #2ec27e solid;
+}
+
+p, b{
+  font-size: 16px;
+}
+
+.planet{
+  border: 1px #2ec27e solid;
+}
+
+#console{
+  border: 1px #2ec27e solid;
+    width: 40%;
+    position: absolute;
+    overflow: auto;
+    top:40%;
+    bottom:100px;
+}
