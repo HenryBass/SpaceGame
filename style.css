@@ -1,5 +1,5 @@
 :root {
-  --color: #2ec27e;
+  --color: #1a5fb4;
 }
 
 
@@ -7,6 +7,7 @@ body {
   font-family: monospace;
   background: black;
   color: var(--color);
+  cursor: cell;
 }
 
 html {
@@ -29,9 +30,12 @@ p, b{
 
 #console{
     width: 40%;
-  height: 40%;
+  height: 150px;
+  max-height: 150px;
     overflow: auto;
-
+  margin: 15px;
+border: 1px var(--color) solid;
+  scrollbar-color: var(--color);
 }
 
 #planet {

@@ -7,13 +7,22 @@ class Player {
     this.tempres = 20;
     this.power = 200;
     this.maxpower = 200;
-    this.laststation;
+    this.laststation = Crios;
   }
   goto(loc) {
+    setTimeout(function(){
     document.getElementById("planetname").innerHTML = loc.name;
     document.getElementById("planetdesc").innerHTML = loc.desc;
     document.getElementById("planetlight").innerHTML = loc.sunlight;
     document.getElementById("planetpop").innerHTML = loc.pop;
+    document.getElementById("planettemp").innerHTML = loc.temp;
+
+    document.documentElement.style.setProperty('--color',  loc.color);
+    }, 1000);
+
+    setTimeout(function(){
+    log("Booted at: " + loc.name)
+    }, 1000);
   }
   kill() {
     this.power = this.maxpower;
@@ -23,23 +32,24 @@ class Player {
 
 
 class Planet {
-  constructor(name, desc, yeild, sunlight, pop, color) {
+  constructor(name, desc, yeild, sunlight, pop, color, temp) {
     this.name = name;
     this.desc = desc;
     this.yeild = yeild;
     this.sunlight = sunlight;
     this.pop = pop + d(pop/5);
-    this.color = color
+    this.color = color;
+    this.temp = temp;
   }
   update() {
   }
 }
 
-Earth = new Planet("Earth", "A lush, water covered world", 1, 0.86, 1_900);
+Crios = new Planet("Crios 404-b", "A vast grassland planet, now only inhabited by a few mining settlements", 1, 0.86, 1_900,"#2ec27e", 296);
+
+Argo = new Planet("Argo 404-c", "A massive planet of water, with a thick atmosphere.", 1, 0.23, 20,"#1a5fb4", 273);
 
 Ship = new Player();
-
-Ship.laststation = Earth;
 
 document.getElementById("command").addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
@@ -49,8 +59,13 @@ document.getElementById("command").addEventListener("keypress", function (event)
 
 function parsemsg(msg) {
 document.getElementById("command").value = "";
-comms = msg.toLowerCase().split(" ");
-  log(msg)
+comms = msg.split(" ");
+if (comms[0] == "warp") {
+  log("Warping...")
+  eval("Ship.goto(" + comms[1] + ")")
+} else {
+  log("Command not recognised - see manual")
+}
 }
 
 function log(msg) {
@@ -66,11 +81,11 @@ function d(n) {
 
 function boot() {
   log("Booting...")
-  Ship.goto(Earth)
-  
+  Ship.goto(Crios)
+
   setTimeout(function(){
-    log("Booted at: " + Ship.laststation.name)
-  }, 1000);
+    log("Type \"manual\" for a list of commands")
+  }, 2000);
   
 }
 boot()
