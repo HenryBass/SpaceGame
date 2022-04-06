@@ -42,12 +42,54 @@ class Planet {
     this.temp = temp;
   }
   update() {
+    Ship.power += ship.solar * this.sunlight;
   }
 }
 
-Crios = new Planet("Crios 404-b", "A vast grassland planet, now only inhabited by a few mining settlements", 1, 0.86, 1_900,"#2ec27e", 296);
+class Station {
+  constructor(name, desc, yeild, sunlight, pop, color, temp) {
+    this.name = name;
+    this.desc = desc;
+    this.sunlight = sunlight;
+    this.pop = pop + d(pop/5);
+    this.color = color;
+    this.temp = temp;
+  }
+  update() {
+    Ship.power += ship.solar * this.sunlight;
+  }
+  dock() {
+    ship.laststation = this;
+  }
+}
 
-Argo = new Planet("Argo 404-c", "A massive planet of water, with a thick atmosphere.", 1, 0.23, 20,"#1a5fb4", 273);
+Crios = new Planet(
+  "Crios 404-b",
+  "A vast grassland planet, now only inhabited by a few mining settlements",
+  1,
+  0.86,
+  1_900,
+  "#2ec27e",
+  296
+);
+
+Argo = new Planet("Argo 404-c",
+  "A massive planet of water, with a thick atmosphere",
+  1,
+  0.23,
+  20,
+  "#1a5fb4",
+  273
+);
+
+Helios = new Station("Helios Station",
+  "A large trading complex, in high orbit over the sun",
+  1,
+  4,
+  90_000,
+  "#f5c211",
+  465
+);
 
 Ship = new Player();
 
@@ -61,8 +103,14 @@ function parsemsg(msg) {
 document.getElementById("command").value = "";
 comms = msg.split(" ");
 if (comms[0] == "warp") {
-  log("Warping...")
-  eval("Ship.goto(" + comms[1] + ")")
+  try {
+    eval(comms[1]).name;
+    log("Warping...")
+    eval("Ship.goto(" + comms[1] + ")")
+  } catch {
+      log("Destination name not recognised. Format is \"Warp [Name]\"")
+  }
+
 } else {
   log("Command not recognised - see manual")
 }
