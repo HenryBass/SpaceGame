@@ -6,6 +6,7 @@ class Player {
     this.iron = 0;
     this.tempres = 20;
     this.power = 200;
+    this.location = Crios;
     this.maxpower = 200;
     this.laststation = Crios;
   }
@@ -27,6 +28,9 @@ class Player {
   kill() {
     this.power = this.maxpower;
     boot()
+  }
+  tick() {
+    
   }
 }
 
@@ -103,6 +107,15 @@ function parsemsg(msg) {
 document.getElementById("command").value = "";
 comms = msg.split(" ");
 if (comms[0] == "warp") {
+  try {
+    eval(comms[1]).name;
+    log("Warping...")
+    eval("Ship.goto(" + comms[1] + ")")
+  } catch {
+      log("Destination name not recognised. Format is \"Warp [Name]\"")
+  }
+
+} else if (comms[0] == "manual") {
   try {
     eval(comms[1]).name;
     log("Warping...")

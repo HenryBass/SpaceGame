@@ -22,6 +22,7 @@ input {
   font-size: 16px;
   border: 1px var(--color) solid;
   width: 40%;
+  
 }
 
 p, b{
@@ -29,6 +30,7 @@ p, b{
 }
 
 #console{
+  padding: 5px;
     width: 40%;
   height: 150px;
   max-height: 150px;
@@ -39,7 +41,17 @@ border: 1px var(--color) solid;
 }
 
 #planet {
-
+  position: absolute;
   margin: 20px;
   width: 40%;
+  top: 230px;
+}
+
+#ship{
+  position: absolute;
+  margin: 20px;
+  width: 40%;
+  float: right;
+  right: 0px;
+  text-align: right;
 }
